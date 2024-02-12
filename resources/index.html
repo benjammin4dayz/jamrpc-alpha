@@ -1,26 +1,26 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>NeutralinoJs sample app</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div id="neutralinoapp">
       <h1>NeutralinoJs</h1>
       <div id="info"></div>
-      <br/>
+      <br />
       <img src="./icons/logo.gif" alt="Neutralinojs" />
-      <div style="margin-top:20px">
-        <a href="#" onclick="NODE.run('ping', 'Neutralino says PING!');">Send PING to NodeJS</a><br>
-        <a id="link-quit" href="#" onclick="NODE.stop();">Quit</a>
-        <a id="link-quit2" href="#" onclick="NODE.run('shutdown');">Quit</a>
+      <div style="margin-top: 20px">
+        <a href="#" onclick="NODE.run('ping', 'Neutralino says PING!');"
+          >Send PING to NodeJS</a
+        ><br />
+        <a href="#" onclick="NODE.run('shutdown');">Stop Node</a>
+        <br />
+        <a href="#" onclick="appShutdown();">Shutdown App</a>
       </div>
-      <div style="margin-top:20px">
-        Received messages:
-      </div>
-      <div id="msg" style="margin-top:20px">
-      </div>
+      <div style="margin-top: 20px">Received messages:</div>
+      <div id="msg" style="margin-top: 20px"></div>
     </div>
     <!-- Neutralino.js client. This file is gitignored, 
         because `neu update` typically downloads it.
