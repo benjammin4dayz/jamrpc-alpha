@@ -16,6 +16,9 @@ function setTray() {
   Neutralino.os.setTray({
     icon: "/resources/icons/trayIcon.png",
     menuItems: [
+      { id: "VANITY", text: "Jam's Presence Manager", isDisabled: true },
+      { id: "SEP", text: "-" },
+      { id: "TOGGLE", text: "Toggle Window" },
       { id: "VERSION", text: "Get version" },
       { id: "SEP", text: "-" },
       { id: "QUIT", text: "Quit" },
@@ -23,8 +26,24 @@ function setTray() {
   });
 }
 
+/**
+ * State variable
+ * - onTrayMenuItemClicked
+ *
+ * TODO: move this into a class for better state management
+ */
+let isWindowVisible = true;
 function onTrayMenuItemClicked(event) {
   switch (event.detail.id) {
+    case "TOGGLE":
+      if (isWindowVisible) {
+        Neutralino.window.hide();
+        isWindowVisible = false;
+      } else {
+        Neutralino.window.show();
+        isWindowVisible = true;
+      }
+      return;
     case "VERSION":
       Neutralino.os.showMessageBox(
         "Version information",
@@ -49,6 +68,35 @@ async function onPingResult(e) {
 
   let msg = document.getElementById("msg");
   msg.innerHTML += e.detail + "<br>";
+}
+
+function submitPresence() {
+  const presence = {};
+
+  const getEl = (id) => document.getElementById(id).value;
+  const _addIfVal = (k, v) => v && v.length > 1 && (presence[k] = v);
+  const addIfVal = (k) => _addIfVal(k, getEl(k));
+
+  addIfVal("details");
+  addIfVal("state");
+  addIfVal("largeImageKey");
+  addIfVal("largeImageText");
+  addIfVal("smallImageKey");
+  addIfVal("smallImageText");
+
+  if (getEl("buttonLabel")) {
+    presence.buttons = [
+      {
+        label: getEl("buttonLabel"),
+        url: getEl("buttonUrl"),
+      },
+    ];
+  }
+
+  NODE.run("setActivity", presence);
+}
+function clearPresence() {
+  NODE.run("clearActivity");
 }
 
 // ---

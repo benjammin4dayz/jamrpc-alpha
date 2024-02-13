@@ -4,19 +4,26 @@
   "description": "Neutralino with a Node.js backend",
   "main": "resources/index.html",
   "scripts": {
-    "build": "neu build --release",
-    "clean": "rm -rf bin/ dist/ node_modules/ extensions/node/node_modules",
-    "fetch:deps": "neu update && cd extensions/node && npm install",
-    "prep": "npm run fetch:deps && npm run neu:trim-bin",
-    "prep:dev": "npm install && npm run prep",
-    "neu:trim-bin": "rm bin/neutralino-mac* bin/neutralino-linux_arm*",
+    "build": "npm run build:jrpc && npm run build:app",
+    "build:app": "neu build --release",
+    "build:jrpc": "esbuild _jrpc/src/index.js --bundle --platform=node --outfile=extensions/dist/jrpc-bundle.js",
+    "clean": "rm -rf bin/ dist/ node_modules/ extensions/dist/ && npm run _node-ext:uninstall",
+    "prep": "npm run _neu:update && npm run _neu:trim-bin && npm run _node-ext:install",
+    "_neu:update": "neu update",
+    "_neu:trim-bin": "rm bin/neutralino-mac* bin/neutralino-linux_arm*",
+    "_node-ext:install": "cd extensions/node && npm install",
+    "_node-ext:uninstall": "cd extensions/node && rm -rf node_modules",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "benjammin4dayz",
   "license": "MIT",
   "devDependencies": {
+    "esbuild": "^0.20.0",
     "eslint": "^8.56.0",
     "prettier": "^3.2.5",
     "prettier-eslint": "^16.3.0"
+  },
+  "dependencies": {
+    "discord-presence-utils": "github:benjammin4dayz/discord-presence-utils#v2.2.0"
   }
 }

@@ -1,0 +1,22 @@
+{
+  "aceo-rpc": {
+    "gameName": "Airport CEO",
+    "homepage": "https://github.com/benjammin4dayz/aceo-discord-rpc",
+    "versions": {
+      "v0.0.0": {
+        "dependencies": [],
+        "sha256": "PLACEHOLDER_SHA256"
+      }
+    }
+  },
+  "poe-rpc": {
+    "gameName": "Path of Exile",
+    "homepage": "https://github.com/benjammin4dayz/PLACEHOLDER_URL",
+    "versions": {
+      "v0.0.0": {
+        "dependencies": [],
+        "sha256": "PLACEHOLDER_SHA256"
+      }
+    }
+  }
+}

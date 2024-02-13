@@ -17,4 +17,5 @@ package-lock.json
 
 # Project folders
 **/node_modules/
+extensions/dist
 extensions/node/_runtime/node*

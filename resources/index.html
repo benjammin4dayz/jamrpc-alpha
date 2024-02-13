@@ -6,6 +6,32 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <div>
+      <header>
+        <h1>JamRPC</h1>
+      </header>
+      <div style="display: flex; flex-direction: column">
+        <label for="details">Details</label>
+        <input id="details" type="text" />
+        <label for="state">State</label>
+        <input id="state" type="text" />
+        <label for="largeImageKey">Large Image Key</label>
+        <input id="largeImageKey" type="text" />
+        <label for="largeImageText">Large Image Text</label>
+        <input id="largeImageText" type="text" />
+        <label for="smallImageKey">Small Image Key</label>
+        <input id="smallImageKey" type="text" />
+        <label for="smallImageText">Small Image Text</label>
+        <input id="smallImageText" type="text" />
+        <label for="buttonLabel">Button Label</label>
+        <input id="buttonLabel" type="text" />
+        <label for="buttonUrl">Button Url</label>
+        <input id="buttonUrl" type="text" />
+        <br />
+        <button onclick="submitPresence();">Send Presence</button>
+        <button onclick="clearPresence();">Clear Presence"></button>
+      </div>
+    </div>
     <div id="neutralinoapp">
       <h1>NeutralinoJs</h1>
       <div id="info"></div>
@@ -15,9 +41,9 @@
         <a href="#" onclick="NODE.run('ping', 'Neutralino says PING!');"
           >Send PING to NodeJS</a
         ><br />
-        <a href="#" onclick="NODE.run('shutdown');">Stop Node</a>
+        <!-- <a onclick="NODE.run('shutdown');">Stop Node</a> -->
         <br />
-        <a href="#" onclick="appShutdown();">Shutdown App</a>
+        <a onclick="appShutdown();">Shutdown App</a>
       </div>
       <div style="margin-top: 20px">Received messages:</div>
       <div id="msg" style="margin-top: 20px"></div>

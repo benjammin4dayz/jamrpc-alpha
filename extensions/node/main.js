@@ -1,6 +1,8 @@
 const NeutralinoExtension = require("./neutralino-extension");
 const DEBUG = true;
 
+const { discordRPC, modLoader } = require("./../dist/jrpc-bundle");
+
 function emit(opts) {
   ext.sendMessage(opts.event, opts.message);
 }
@@ -33,7 +35,17 @@ function processAppEvent(d) {
     switch (d.data.function) {
       case "ping":
         return ping(d.data.parameter);
+      case "ModuleLoader":
+        const p = d.data.parameter;
+        if (p === "getModuleStorage") modLoader.getModuleStorage();
+        if (p === "refreshModuleStorage") modLoader.refreshModuleStorage();
+        return;
+      case "setActivity":
+        return discordRPC.setActivity(d.data.parameter);
+      case "clearActivity":
+        return discordRPC.clearActivity();
       case "shutdown":
+        discordRPC.destroy();
         return shutdown();
       default:
         return ENOFN(d.data.function);
@@ -49,3 +61,5 @@ console.log("NodeJS Version:", process.version);
 console.log("NodeJS Path:", process.execPath);
 console.log("---");
 ext.run(processAppEvent);
+
+discordRPC.connect();
