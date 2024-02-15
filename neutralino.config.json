@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/neutralinojs/neutralinojs/main/schemas/neutralino.config.schema.json",
-  "applicationId": "js.neutralino.sample",
-  "version": "1.0.0",
+  "applicationId": "jamrpc-alpha",
+  "version": "0.1.0",
   "defaultMode": "window",
   "port": 0,
   "documentRoot": "/resources/",
@@ -12,7 +12,7 @@
   "tokenSecurity": "one-time",
   "logging": {
     "enabled": true,
-    "writeToLogFile": true
+    "writeToLogFile": false
   },
   "nativeAllowList": [
     "app.*",
@@ -36,7 +36,7 @@
   },
   "modes": {
     "window": {
-      "title": "neu-node",
+      "title": "JamRPC Alpha",
       "width": 800,
       "height": 500,
       "minWidth": 400,
@@ -45,7 +45,7 @@
       "fullScreen": false,
       "alwaysOnTop": false,
       "icon": "/resources/icons/appIcon.png",
-      "enableInspector": true,
+      "enableInspector": false,
       "borderless": false,
       "maximize": false,
       "hidden": false,
@@ -77,7 +77,7 @@
     }
   },
   "cli": {
-    "binaryName": "neu-node",
+    "binaryName": "jamrpc-alpha",
     "resourcesPath": "/resources/",
     "extensionsPath": "/extensions/",
     "clientLibrary": "/resources/js/neutralino.js",
@@ -88,14 +88,7 @@
     {
       "id": "extNode",
       "commandLinux": "${NL_PATH}/extensions/node/_runtime/node --inspect ${NL_PATH}/extensions/node/main.js",
-      "commandWindows": "${NL_PATH}\\extensions\\node\\_runtime\\node --inspect ${NL_PATH}/extensions/node/main.js"
+      "commandWindows": "${NL_PATH}\\extensions\\node\\_runtime\\node ${NL_PATH}/extensions/node/main.js"
     }
-  ],
-  "buildScript": {
-    "win": {
-      "architecture": ["x64"],
-      "appName": "neu-node",
-      "appIcon": "resources/icons/appIcon.ico"
-    }
-  }
+  ]
 }

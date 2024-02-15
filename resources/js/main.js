@@ -19,7 +19,7 @@ function setTray() {
       { id: "VANITY", text: "Jam's Presence Manager", isDisabled: true },
       { id: "SEP", text: "-" },
       { id: "TOGGLE", text: "Toggle Window" },
-      { id: "VERSION", text: "Get version" },
+      // { id: "VERSION", text: "Get version" },
       { id: "SEP", text: "-" },
       { id: "QUIT", text: "Quit" },
     ],
@@ -44,12 +44,12 @@ function onTrayMenuItemClicked(event) {
         isWindowVisible = true;
       }
       return;
-    case "VERSION":
-      Neutralino.os.showMessageBox(
-        "Version information",
-        `Neutralinojs server: v${NL_VERSION} | Neutralinojs client: v${NL_CVERSION}`,
-      );
-      break;
+    // case "VERSION":
+    //   Neutralino.os.showMessageBox(
+    //     "Version information",
+    //     `Neutralinojs server: v${NL_VERSION} | Neutralinojs client: v${NL_CVERSION}`,
+    //   );
+    //   break;
     case "QUIT":
       appShutdown();
       break;
@@ -68,6 +68,16 @@ async function onPingResult(e) {
 
   let msg = document.getElementById("msg");
   msg.innerHTML += e.detail + "<br>";
+}
+
+async function onUpdateAvailable(d) {
+  const { current, available, downloadUrl } = JSON.parse(d.detail);
+  await Neutralino.os.showMessageBox(
+    "Update available!",
+    `${available} (current: ${current})`,
+    "OK",
+  );
+  Neutralino.os.open(downloadUrl);
 }
 
 function submitPresence() {
@@ -106,9 +116,11 @@ Neutralino.events.on("trayMenuItemClicked", onTrayMenuItemClicked);
 Neutralino.events.on("windowClose", appShutdown);
 Neutralino.events.on("pingResult", onPingResult);
 Neutralino.events.on("nodeExtError", (e) => console.warn(e.detail));
+Neutralino.events.on("updateAvailable", onUpdateAvailable);
 
 if (NL_OS != "Darwin") setTray(); // TODO: Fix https://github.com/neutralinojs/neutralinojs/issues/615
 
 showInfo();
 
 const NODE = new NodeExtension(true);
+NODE.run("checkAppUpdates");

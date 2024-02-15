@@ -1,4 +1,5 @@
 import fs from "fs";
+import semver from "semver";
 
 class VersionManager {
   /**
@@ -6,12 +7,14 @@ class VersionManager {
    */
   constructor({
     repo,
+    currentVersion,
     userAgent,
     requestFn,
     outfile,
     debug,
     logger,
     personalAccessTokenSecret,
+    onUpdateAvailableCb,
   }) {
     if (!repo) throw new Error("Missing repo from which to fetch data");
     if (!userAgent)
@@ -25,7 +28,9 @@ class VersionManager {
     this.fetch = requestFn || fetch;
     this.outfile = outfile || null;
 
-    this.versionCurrent = "v?.?.?";
+    this.versionCurrent = currentVersion || null;
+
+    this.onUpdateAvailableCb = onUpdateAvailableCb || (() => {});
 
     this.headers = {
       Accept: "application/vnd.github.v3+json",
@@ -35,31 +40,59 @@ class VersionManager {
       }),
     };
     this.endpoint = `https://api.github.com/repos/${repo}/releases/latest`;
+    this.downloadUrl = `https://github.com/${repo}/releases/latest`;
 
     this.response = null;
-    this.versionLatest = null;
+    this.versionAvailable = null;
   }
 
-  set version(o) {
-    this._version = {
-      current: o?.current,
-      available: o?.available,
-      lastUpdateTime: Date.now(),
-    };
-  }
-  get version() {
-    return this._version;
-  }
+  // set version(o) {
+  //   this._version = {
+  //     current: o?.current,
+  //     available: o?.available,
+  //     lastUpdateTime: Date.now(),
+  //   };
+  // }
+  // get version() {
+  //   return this._version;
+  // }
 
   async init() {
     this.response = await this.makeRequest();
     this.DBG("RECEIVE_RESPONSE");
-    this.versionLatest = this.response.tag_name;
+    this.versionAvailable = this.response.tag_name;
+
+    const isUpdateAvailable = this.semverCheck();
+    if (isUpdateAvailable) {
+      this.logger.log(
+        `Update available! ${this.versionAvailable} (current: ${this.versionCurrent})`,
+      );
+      try {
+        this.onUpdateAvailableCb();
+      } catch (e) {
+        console.error("Failed to call onUpdateAvailableCb", e);
+      }
+    } else {
+      this.logger.log(`Up to date! (current: ${this.versionCurrent})`);
+    }
+
     if (this.outfile) {
       this.logger.log(`Writing ${this.outfile}...`);
-      fs.writeFileSync(this.outfile, this.response, "utf8");
+      fs.writeFileSync(this.outfile, JSON.stringify(this.response), "utf8");
     }
     return this.response;
+  }
+
+  /**
+   *
+   * @returns {boolean} true if the current version is outdated
+   */
+  semverCheck() {
+    if (this.versionAvailable) {
+      return semver.gt(this.versionAvailable, this.versionCurrent);
+    } else {
+      return false;
+    }
   }
 
   async makeRequest() {

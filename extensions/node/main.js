@@ -1,7 +1,11 @@
 const NeutralinoExtension = require("./neutralino-extension");
 const DEBUG = true;
 
-const { discordRPC, modLoader } = require("./../dist/jrpc-bundle");
+const {
+  discordRPC,
+  modLoader,
+  versionManager,
+} = require("./../dist/jrpc-bundle");
 
 function emit(opts) {
   ext.sendMessage(opts.event, opts.message);
@@ -44,6 +48,9 @@ function processAppEvent(d) {
         return discordRPC.setActivity(d.data.parameter);
       case "clearActivity":
         return discordRPC.clearActivity();
+      case "checkAppUpdates":
+        if (d.data.parameter) versionManager.versionCurrent = d.data.parameter;
+        return versionManager.init();
       case "shutdown":
         discordRPC.destroy();
         return shutdown();
@@ -63,3 +70,13 @@ console.log("---");
 ext.run(processAppEvent);
 
 discordRPC.connect();
+versionManager.onUpdateAvailableCb = function () {
+  emit({
+    event: "updateAvailable",
+    message: JSON.stringify({
+      current: versionManager.versionCurrent || "",
+      available: versionManager.versionAvailable || "",
+      downloadUrl: versionManager.downloadUrl || "",
+    }),
+  });
+};

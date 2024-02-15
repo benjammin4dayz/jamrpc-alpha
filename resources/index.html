@@ -12,41 +12,42 @@
       </header>
       <div style="display: flex; flex-direction: column">
         <label for="details">Details</label>
-        <input id="details" type="text" />
+        <input id="details" type="text" value="Powered by Neutralino!" />
         <label for="state">State</label>
         <input id="state" type="text" />
         <label for="largeImageKey">Large Image Key</label>
-        <input id="largeImageKey" type="text" />
+        <input
+          id="largeImageKey"
+          type="text"
+          value="https://avatars.githubusercontent.com/u/36976817?s=200&v=4"
+        />
         <label for="largeImageText">Large Image Text</label>
-        <input id="largeImageText" type="text" />
+        <input id="largeImageText" type="text" value="Tiny web apps!" />
         <label for="smallImageKey">Small Image Key</label>
         <input id="smallImageKey" type="text" />
         <label for="smallImageText">Small Image Text</label>
         <input id="smallImageText" type="text" />
         <label for="buttonLabel">Button Label</label>
-        <input id="buttonLabel" type="text" />
+        <input id="buttonLabel" type="text" value="Neutralino.js" />
         <label for="buttonUrl">Button Url</label>
-        <input id="buttonUrl" type="text" />
+        <input id="buttonUrl" type="text" value="https://neutralino.js.org/" />
         <br />
         <button onclick="submitPresence();">Send Presence</button>
-        <button onclick="clearPresence();">Clear Presence"></button>
+        <button onclick="clearPresence();">Clear Presence</button>
       </div>
+      <div style="margin-top: 20px">
+        <a href="#msg" onclick="NODE.run('ping', 'Neutralino says PING!');"
+          >Send PING to NodeJS</a
+        ><br />
+      </div>
+      <div style="margin-top: 20px">Received messages:</div>
+      <div id="msg" style="margin-top: 20px"></div>
     </div>
-    <div id="neutralinoapp">
+    <div id="neutralinoapp" style="display: none">
       <h1>NeutralinoJs</h1>
       <div id="info"></div>
       <br />
       <img src="./icons/logo.gif" alt="Neutralinojs" />
-      <div style="margin-top: 20px">
-        <a href="#" onclick="NODE.run('ping', 'Neutralino says PING!');"
-          >Send PING to NodeJS</a
-        ><br />
-        <!-- <a onclick="NODE.run('shutdown');">Stop Node</a> -->
-        <br />
-        <a onclick="appShutdown();">Shutdown App</a>
-      </div>
-      <div style="margin-top: 20px">Received messages:</div>
-      <div id="msg" style="margin-top: 20px"></div>
     </div>
     <!-- Neutralino.js client. This file is gitignored, 
         because `neu update` typically downloads it.

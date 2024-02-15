@@ -1,6 +1,6 @@
 # JamRPC
 
-This app is a **simple** & **lightweight** Discord Rich Presence manager built on Neutralino and Node!
+This is a lightweight application built on Neutralino and Node.js to manage Discord Rich Presence.
 
 ## 🚀 Features
 
@@ -20,29 +20,41 @@ This app is a **simple** & **lightweight** Discord Rich Presence manager built o
 
 ## 🧑‍💻 Setup Instructions
 
-1. #### Get the app!
+### Getting started
 
-   Download the [latest release](https://github.com/benjammin4dayz/jrpc-beta/releases/latest) and extract it anywhere you prefer.
+Download the [latest release](https://github.com/benjammin4dayz/jamrpc-alpha/releases/latest) and extract it anywhere you prefer.
 
-2. #### Get the dependencies.
+### Automatic (TLDR)
+
+1.  Start `install.cmd` to download the project's dependencies.
+
+2.  Open the app!
+
+### Manual
+
+<details>
+
+1. #### Get the dependencies.
 
    Download a Node.js **binary** from [nodejs.org](https://nodejs.org/en/download/)
 
-   - [Windows x64](https://nodejs.org/dist/v20.11.0/node-v20.11.0-win-x64.zip)
+   - [Windows x64](https://nodejs.org/dist/v20.11.1/node-v20.11.1-win-x64.zip)
 
-3. #### Configure the dependencies
+2. #### Configure the dependencies
 
    Move `node.exe` from `Step 2` into the app folder from `Step 1`. Nest it inside `extensions/node/_runtime`.
 
    > [!NOTE]  
    > `node.exe` MUST be inside the \_runtime folder. Global installs are not supported at this time.
 
-4. #### Start the app!
+3. #### Start the app!
 
-   > [!TIP]
-   > You can test the backend by clicking "Send PING to NodeJS"
-   >
-   > If you aren't getting a response, ensure that `node.exe` has been placed inside the `extensions/node/_runtime` folder and then close and restart the app.
+</details>
+
+> [!TIP]
+> You can test the backend by clicking "Send PING to NodeJS"
+>
+> If you aren't getting a response, ensure that `node.exe` has been placed inside the `extensions/node/_runtime` folder and then close and restart the app.
 
 ## Acknowledgements
 
@@ -55,6 +67,33 @@ This app is a **simple** & **lightweight** Discord Rich Presence manager built o
 ---
 
 ### Notes
+
+<details>
+<summary>Development</summary>
+
+### Requirements:
+
+[Node.js v20+](https://nodejs.org)
+
+### Commands
+
+1.  Prepare dependencies
+
+        npm run prep
+
+2.  Build the app
+
+        npm run build
+
+3.  Tidy up afterwards
+
+        npm run clean
+
+The build process will output some `cmd/batch` scripts, which can be used to fetch a suitable Node.js executable and purge cached app data from the user's system respectively.
+
+---
+
+</details>
 
 <details>
 <summary>Add a function</summary>
@@ -86,5 +125,14 @@ This app is a **simple** & **lightweight** Discord Rich Presence manager built o
    ```
 
    ***
+
+</details>
+
+<details>
+<summary>Spaghetti</summary>
+
+I know it's bad. I'm looking into solutions to keep things manageable.
+
+...but _it works_ for now
 
 </details>

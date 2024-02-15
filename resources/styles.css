@@ -1,16 +1,28 @@
 #neutralinoapp {
-    text-align: center;
-    -webkit-user-select: none;
-    user-select: none;
-    cursor: default;
+  text-align: center;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: default;
 }
 
-#neutralinoapp h1{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 20px;
+#neutralinoapp h1 {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 20px;
 }
 
 #neutralinoapp > div {
-    font-size: 16px;
-    font-weight: normal;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+/* -- */
+
+html {
+  background-color: #333;
+  color: #d3d3d3;
+}
+
+input {
+  background-color: #555 !important;
+  color: #d3d3d3 !important;
 }
