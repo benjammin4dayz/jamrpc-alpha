@@ -42,7 +42,7 @@ Download the [latest release](https://github.com/benjammin4dayz/jamrpc-alpha/rel
 
 2. #### Configure the dependencies
 
-   Move `node.exe` from `Step 2` into the app folder from `Step 1`. Nest it inside `extensions/node/_runtime`.
+   Move `node.exe` to the app folder and nest it inside `extensions/node/_runtime`.
 
    > [!NOTE]  
    > `node.exe` MUST be inside the \_runtime folder. Global installs are not supported at this time.
@@ -75,11 +75,13 @@ Download the [latest release](https://github.com/benjammin4dayz/jamrpc-alpha/rel
 
 [Node.js v20+](https://nodejs.org)
 
+[@neutralinojs/neu](https://www.npmjs.com/package/@neutralinojs/neu)
+
 ### Commands
 
 1.  Prepare dependencies
 
-        npm run prep
+        npm i -g @neutralinojs/neu && npm run prep
 
 2.  Build the app
 
