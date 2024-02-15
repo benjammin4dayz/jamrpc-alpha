@@ -51,10 +51,12 @@ function makeUninstaller({ appName = "unnamed", outfile } = {}) {
       `set /p choice="Continue? (y/n): "`,
       `if /i "%choice%"=="y" (`,
       `rmdir /s /q %T_DIR%`,
-      `echo Done! You may delete this folder manually.`,
+      `echo Done!`,
+      `echo.`,
       `) else (`,
       `echo Deletion cancelled. No files were removed.`,
       `)`,
+      `echo You may now delete the folder which contains this script.`,
       `pause`,
     ].join("\n");
 

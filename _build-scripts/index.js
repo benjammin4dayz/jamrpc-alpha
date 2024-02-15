@@ -2,7 +2,7 @@ const fs = require("fs");
 
 const paths = require("./get-paths");
 const setMetadata = require("./set-metadata");
-const { makeInstaller, makeUninstaller } = require("./make-distributable");
+const { makeInstaller, makeUninstaller } = require("./make-installers");
 
 const { name } = require("./../package.json");
 

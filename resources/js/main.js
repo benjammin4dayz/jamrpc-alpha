@@ -80,6 +80,32 @@ async function onUpdateAvailable(d) {
   Neutralino.os.open(downloadUrl);
 }
 
+async function checkDependenciesExist() {
+  let stats;
+
+  try {
+    if (NL_OS === "Windows") {
+      stats = await Neutralino.filesystem.getStats(
+        "./extensions/node/_runtime/node.exe",
+      );
+    }
+    if (NL_OS === "Linux") {
+      stats = await Neutralino.filesystem.getStats(
+        "./extensions/node/_runtime/node",
+      );
+    }
+  } catch (e) {
+    if (e.code === "NE_FS_NOPATHE") {
+      Neutralino.os.showMessageBox(
+        "Missing node executable",
+        "Please run the install script or follow the manual installation instructions\n\nThe app will now quit.",
+        "OK",
+      );
+      appShutdown();
+    }
+  }
+}
+
 function submitPresence() {
   const presence = {};
 
@@ -121,6 +147,7 @@ Neutralino.events.on("updateAvailable", onUpdateAvailable);
 if (NL_OS != "Darwin") setTray(); // TODO: Fix https://github.com/neutralinojs/neutralinojs/issues/615
 
 showInfo();
+checkDependenciesExist();
 
 const NODE = new NodeExtension(true);
 NODE.run("checkAppUpdates");

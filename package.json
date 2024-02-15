@@ -1,7 +1,7 @@
 {
   "name": "jamrpc-alpha",
   "prettyName": "JamRPC Alpha",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Neutralino with a Node.js backend",
   "main": "resources/index.html",
   "scripts": {
