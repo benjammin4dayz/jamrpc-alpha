@@ -2,18 +2,25 @@
 
 This is a lightweight application built on Neutralino and Node.js to manage Discord Rich Presence.
 
+<a href="./img/window.png">
+<img src="./img/window.png" style="height: 437px; width: 305px"></img>
+</a>
+
+<a href="./img/presence.png">
+<img src="./img/presence.png"></img>
+</a>
+
 ## 🚀 Features
 
-- Set custom Discord Rich Presence
-- Toggleable GUI (Graphical User Interface)
-- Continuously display presence.
-- System tray icon per O.S.
-- Can run in background.
+- Continuously display custom Discord Rich Presence.
+- Hide the window in the system tray.
 - Cross-platform (probably™).
 
 #### Planned
 
 - Drop-in RPC modules for select games.
+- Drop-in RPC modules for activities (e.g. Birthday countdown)
+- UI/UX overhaul
 
 > [!Warning]  
 > **Work in Progress** - features and bugs may appear or disappear at random. Check back often!
@@ -75,8 +82,6 @@ Download the [latest release](https://github.com/benjammin4dayz/jamrpc-alpha/rel
 
 [Node.js v20+](https://nodejs.org)
 
-[@neutralinojs/neu](https://www.npmjs.com/package/@neutralinojs/neu)
-
 ### Commands
 
 1.  Prepare dependencies
@@ -126,7 +131,7 @@ The build process will output some `cmd/batch` scripts, which can be used to fet
    NODE.run("foo");
    ```
 
-   ***
+---
 
 </details>
 
