@@ -1,0 +1,12 @@
+{
+  "aceo-rpc": {
+    "gameName": "Airport CEO",
+    "homepage": "https://github.com/benjammin4dayz/aceo-discord-rpc",
+    "versions": {
+      "v0.0.0": {
+        "dependencies": [],
+        "sha256": "PLACEHOLDER_SHA256"
+      }
+    }
+  }
+}

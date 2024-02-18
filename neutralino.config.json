@@ -1,0 +1,54 @@
+{
+  "$schema": "https://raw.githubusercontent.com/neutralinojs/neutralinojs/main/schemas/neutralino.config.schema.json",
+  "applicationId": "jamrpc-alpha",
+  "version": "0.3.0",
+  "defaultMode": "window",
+  "documentRoot": "/react-src/build/",
+  "url": "/",
+  "enableServer": true,
+  "enableNativeAPI": true,
+  "enableExtensions": true,
+  "nativeAllowList": [
+    "app.*",
+    "filesystem.readDirectory",
+    "extensions.*",
+    "os.showMessageBox",
+    "os.setTray",
+    "window.hide",
+    "window.show"
+  ],
+  "modes": {
+    "window": {
+      "title": "JamRPC Alpha",
+      "width": 600,
+      "height": 400,
+      "minWidth": 400,
+      "minHeight": 200,
+      "icon": "/react-src/public/logo192.png",
+      "exitProcessOnClose": false,
+      "enableInspector": true
+    }
+  },
+  "cli": {
+    "binaryName": "jamrpc-alpha",
+    "resourcesPath": "/react-src/build/",
+    "extensionsPath": "/extensions/dist/",
+    "binaryVersion": "5.0.0",
+    "clientVersion": "5.0.0",
+    "frontendLibrary": {
+      "patchFile": "/react-src/public/index.html",
+      "devUrl": "http://localhost:3000",
+      "projectPath": "/",
+      "initCommand": "npm install",
+      "devCommand": "BROWSER=none cd react-src && npm run start",
+      "buildCommand": "npm run build --workspaces"
+    }
+  },
+  "extensions": [
+    {
+      "id": "extNode",
+      "commandLinux": "${NL_PATH}/extensions/node --inspect ${NL_PATH}/extensions/dist/node-ext.bundle.js",
+      "commandWindows": "${NL_PATH}\\extensions\\node --inspect ${NL_PATH}\\extensions\\dist\\node-ext.bundle.js"
+    }
+  ]
+}

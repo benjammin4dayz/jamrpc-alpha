@@ -1,0 +1,74 @@
+.App {
+  /* background-color: #282c34; */
+  background-color: #2d2f3b;
+  color: #f2f2f2;
+  min-height: 100vh;
+  user-select: none;
+}
+
+.App input {
+  background-color: #2b3444;
+  color: #f2f2f2;
+  /* border: 1px solid #455879; */
+  border: 1px solid #447c90;
+  border-radius: 4px;
+  padding-left: 0.7em;
+  /* negative margin is a lazy hack for inset clear button */
+  margin-right: -20px;
+  box-shadow: 2px 2px 4px #3c6f823f;
+}
+
+.App button {
+  background-color: #a2cfdc;
+  border: 1px solid #447c90;
+  border-radius: 4px;
+}
+
+.App button:hover {
+  /* outline: 2px solid #a2cfdc; */
+  background-color: #447c90;
+}
+
+.App button:active {
+  background-color: #dcbca2;
+}
+
+.App input:focus {
+  /* outline: 3px solid #ffa000; */
+  outline: 2px solid #a2cfdc;
+}
+
+.App-logo {
+  height: 17vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  display: flex;
+  font-size: calc(2px + 2vmin);
+}
+
+/* .App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(2px + 2vmin);
+  color: white;
+} */
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
