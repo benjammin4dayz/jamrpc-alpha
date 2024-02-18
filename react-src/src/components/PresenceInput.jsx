@@ -27,6 +27,48 @@ const inputConfigurations = [
   { label: '└ Link', name: 'buttonUrlA', type: 'text' },
 ];
 
+// TODO:
+//      Move validation logic to the backend to restrict the opportunity
+//      for the frontend to break it by sending poorly structured data.
+function formatPresenceData(inputVals) {
+  /**
+   * Ensure string values are at least 2 characters. Can accept an array
+   * of strings, which will return true when all values were valid.
+   * @param {string | string[]} value
+   * @returns {boolean}
+   */
+  const isValidLen = (value) => {
+    if (typeof value === 'string') {
+      return value.length >= 2;
+    } else if (Array.isArray(value)) {
+      const values = value.filter((val) => isValidLen(val));
+      return values.length === value.length;
+    }
+    return false;
+  };
+  // Deep copy object and destructure keys that aren't included in the final payload
+  const { buttonLabelA, buttonUrlA, ...otherInputVals } = JSON.parse(
+    JSON.stringify(inputVals)
+  );
+  // Delete keys from the object if their values are invalid
+  Object.keys(otherInputVals).forEach((key) => {
+    if (typeof otherInputVals[key] === 'string') {
+      if (!otherInputVals[key]) delete otherInputVals[key];
+      if (!isValidLen(otherInputVals[key])) delete otherInputVals[key];
+    }
+  });
+  // Add buttons conditionally when both label and url are valid
+  if (isValidLen([buttonLabelA, buttonUrlA])) {
+    otherInputVals.buttons = [];
+    otherInputVals.buttons.push({ label: buttonLabelA, url: buttonUrlA });
+    // TODO: Add a second button input
+    // if (isValidLen([buttonLabelB, buttonUrlB])) {
+    //   otherInputVals.buttons.push({ label: buttonLabelB, url: buttonUrlB });
+    // }
+  }
+  return otherInputVals;
+}
+
 const PresenceInput = ({
   style = {},
   setDiscordPresence = () => {},
@@ -34,7 +76,6 @@ const PresenceInput = ({
   persistentVals,
 }) => {
   const [inputVals, setInputVals] = useState({ ...presence });
-
   useEffect(() => {
     setInputVals((prevInputVals) => ({
       ...prevInputVals,
@@ -42,17 +83,22 @@ const PresenceInput = ({
     }));
   }, [persistentVals]);
 
-  const clearInputVals = () => {
-    // setInputVals({ ...presence });
-    unsetDiscordPresence();
-  };
-
   const handleInputChange = (inputName) => (e) => {
     const value = e.target.value;
     setInputVals({
       ...inputVals,
-      [inputName]: value !== '' ? value : undefined,
+      [inputName]: value,
     });
+  };
+
+  const onClickClear = () => {
+    unsetDiscordPresence();
+  };
+
+  const onClickDisplay = () => {
+    const data = formatPresenceData(inputVals);
+    console.log(JSON.stringify(data, null, 2));
+    setDiscordPresence(data);
   };
 
   return (
@@ -91,34 +137,10 @@ const PresenceInput = ({
           justifyContent: 'center',
         }}
       >
-        <button style={{ flex: 1 }} onClick={clearInputVals}>
+        <button style={{ flex: 1 }} onClick={onClickClear}>
           Clear
         </button>
-        <button
-          style={{ flex: 1 }}
-          onClick={() => {
-            const { buttonLabelA, buttonUrlA, ...otherInputVals } = JSON.parse(
-              JSON.stringify(inputVals)
-            );
-
-            Object.keys(otherInputVals).forEach((key) => {
-              if (!otherInputVals[key]) delete otherInputVals[key];
-            });
-
-            const updatedInputValsCopy = {
-              ...otherInputVals,
-              ...(buttonLabelA?.length >= 2 &&
-                buttonUrlA?.length >= 2 && {
-                  buttons: [{ label: buttonLabelA, url: buttonUrlA }],
-                }),
-            };
-            console.info(
-              'Form values:',
-              JSON.stringify(updatedInputValsCopy, null, 2)
-            );
-            setDiscordPresence(updatedInputValsCopy);
-          }}
-        >
+        <button style={{ flex: 1 }} onClick={onClickDisplay}>
           Display
         </button>
       </div>

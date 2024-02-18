@@ -1,5 +1,5 @@
-import fs from "fs";
-import semver from "semver";
+import fs from 'fs';
+import semver from 'semver';
 
 class VersionManager {
   /**
@@ -16,10 +16,10 @@ class VersionManager {
     personalAccessTokenSecret,
     onUpdateAvailableCb,
   }) {
-    if (!repo) throw new Error("Missing repo from which to fetch data");
+    if (!repo) throw new Error('Missing repo from which to fetch data');
     if (!userAgent)
       throw new Error(
-        "Identify yourself with a userAgent when making requests",
+        'Identify yourself with a userAgent when making requests'
       );
 
     this.debug = debug || false;
@@ -33,8 +33,8 @@ class VersionManager {
     this.onUpdateAvailableCb = onUpdateAvailableCb || (() => {});
 
     this.headers = {
-      Accept: "application/vnd.github.v3+json",
-      "User-Agent": userAgent,
+      Accept: 'application/vnd.github.v3+json',
+      'User-Agent': userAgent,
       ...(personalAccessTokenSecret && {
         Authorization: `Bearer ${personalAccessTokenSecret}`,
       }),
@@ -59,18 +59,18 @@ class VersionManager {
 
   async init() {
     this.response = await this.makeRequest();
-    this.DBG("RECEIVE_RESPONSE");
+    this.DBG('RECEIVE_RESPONSE');
     this.versionAvailable = this.response.tag_name;
 
     const isUpdateAvailable = this.semverCheck();
     if (isUpdateAvailable) {
       this.logger.log(
-        `Update available! ${this.versionAvailable} (current: ${this.versionCurrent})`,
+        `Update available! ${this.versionAvailable} (current: ${this.versionCurrent})`
       );
       try {
         this.onUpdateAvailableCb();
       } catch (e) {
-        console.error("Failed to call onUpdateAvailableCb", e);
+        console.error('Failed to call onUpdateAvailableCb', e);
       }
     } else {
       this.logger.log(`Up to date! (current: ${this.versionCurrent})`);
@@ -78,7 +78,7 @@ class VersionManager {
 
     if (this.outfile) {
       this.logger.log(`Writing ${this.outfile}...`);
-      fs.writeFileSync(this.outfile, JSON.stringify(this.response), "utf8");
+      fs.writeFileSync(this.outfile, JSON.stringify(this.response), 'utf8');
     }
     return this.response;
   }
@@ -96,14 +96,14 @@ class VersionManager {
   }
 
   async makeRequest() {
-    this.DBG("SEND_REQUEST");
+    this.DBG('SEND_REQUEST');
     return this.fetch(this.endpoint, {
-      method: "GET",
+      method: 'GET',
       headers: this.headers,
     })
       .then((r) => r.json())
       .catch((e) => {
-        this.logger.log("An error occured while making the request");
+        this.logger.log('An error occured while making the request');
         throw e;
       });
   }
@@ -111,13 +111,13 @@ class VersionManager {
   DBG(idx) {
     if (this.debug) {
       switch (idx) {
-        case "SEND_REQUEST":
+        case 'SEND_REQUEST':
           this.logger.log(
-            `REQUEST:\n  => ${this.endpoint}\n  => User-Agent: ${this.headers["User-Agent"]}`,
+            `REQUEST:\n  => ${this.endpoint}\n  => User-Agent: ${this.headers['User-Agent']}`
           );
           break;
-        case "RECEIVE_RESPONSE":
-          this.logger.log("<==");
+        case 'RECEIVE_RESPONSE':
+          this.logger.log('<==');
           this.logger.log(JSON.stringify(this.response, null, 2));
           break;
         default:

@@ -1,7 +1,7 @@
-import { RPCClient } from "discord-presence-utils";
+import { RPCClient } from 'discord-presence-utils';
 
 class ClientHandler extends RPCClient {
-  constructor(clientId = "1199430004510036132") {
+  constructor(clientId = '1199430004510036132') {
     super();
     this.clientId = clientId;
     this.activity = {};

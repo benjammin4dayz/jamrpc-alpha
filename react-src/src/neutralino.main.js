@@ -31,9 +31,15 @@ async function appShutdown() {
   Neutralino.app.exit();
 }
 
+/**
+ * Configure and create a system tray icon.
+ *
+ * @requires Neutralino.os.setTray
+ * @see https://neutralino.js.org/docs/api/os/#ossettrayoptions
+ */
 async function setTray() {
   // This is a neutralino global
-  if (window?.NL_MODE != 'window') return;
+  if (window?.NL_MODE !== 'window') return;
 
   const tray = {
     icon: '/react-src/public/logo192.png',
@@ -63,6 +69,8 @@ function onTrayMenuItemClicked(e) {
     case 'Quit':
       appShutdown();
       break;
+    default:
+      break;
   }
 }
 
@@ -78,6 +86,12 @@ function registerListeners({ onWindowClose = () => {} }) {
   Neutralino.events.on('trayMenuItemClicked', onTrayMenuItemClicked);
 }
 
+/**
+ * Check if Node.js executable is available
+ * @param {string} dir
+ * @requires Neutralino.os.showMessageBox
+ * @see https://neutralino.js.org/docs/api/os/#osshowmessageboxtitle-content-choice-icon
+ */
 function dependencyCheck(dir = './extensions') {
   Neutralino.filesystem
     .readDirectory(dir)
