@@ -1,0 +1,33 @@
+name: Release
+
+on:
+  push:
+    tags: ["*"]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/iron
+
+      - name: Install dependencies
+        run: |
+          npm i -g @neutralinojs/neu
+          npm run neu:get-bin
+          npm install
+
+      - name: Generate artifact
+        run: npm run build:release
+
+      - name: Create release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "./dist/*.zip,./dist/*.tar.gz"

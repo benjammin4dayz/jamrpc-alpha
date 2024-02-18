@@ -8,6 +8,11 @@
   "enableServer": true,
   "enableNativeAPI": true,
   "enableExtensions": true,
+  "tokenSecurity": "one-time",
+  "logging": {
+    "enabled": false,
+    "writeToLogFile": false
+  },
   "nativeAllowList": [
     "app.*",
     "filesystem.readDirectory",
@@ -26,7 +31,7 @@
       "minHeight": 200,
       "icon": "/react-src/public/logo192.png",
       "exitProcessOnClose": false,
-      "enableInspector": true
+      "enableInspector": false
     }
   },
   "cli": {
@@ -47,8 +52,8 @@
   "extensions": [
     {
       "id": "extNode",
-      "commandLinux": "${NL_PATH}/extensions/node --inspect ${NL_PATH}/extensions/dist/node-ext.bundle.js",
-      "commandWindows": "${NL_PATH}\\extensions\\node --inspect ${NL_PATH}\\extensions\\dist\\node-ext.bundle.js"
+      "commandLinux": "${NL_PATH}/extensions/node ${NL_PATH}/extensions/dist/node-ext.bundle.js",
+      "commandWindows": "${NL_PATH}\\extensions\\node ${NL_PATH}\\extensions\\dist\\node-ext.bundle.js"
     }
   ]
 }

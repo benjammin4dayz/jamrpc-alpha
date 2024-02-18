@@ -8,11 +8,13 @@
   "scripts": {
     "start": "neu run",
     "build": "node build-scripts && neu build",
-    "clean": "rm -rf dist/ node_modules/ && npm run react-src:tidy",
-    "app-src:build": "npm run build --workspace ./app-src/node",
+    "build:release": "node build-scripts && neu build --release",
+    "clean": "rm -rf dist/ node_modules/ && npm run react-src:tidy && npm run ext:tidy",
+    "fix": "prettier --write '**/*.{js,jsx,ts,tsx,json}'",
+    "neu:get-bin": "neu update && rm bin/neutralino-mac* bin/neutralino-linux_arm*",
+    "ext:tidy": "cd extensions && rm -rf dist/ node_modules/",
     "react-src:tidy": "cd react-src && rm -rf build/ node_modules/",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "fix": "prettier --write '**/*.{js,jsx,ts,tsx,json}'"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "benjammin4dayz",
   "license": "MIT",
