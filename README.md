@@ -1,57 +1,40 @@
 # JamRPC
 
-This is a lightweight application built on Neutralino and Node.js to manage Discord Rich Presence.
+This is a small desktop app which allows you to display rich presence on Discord.
 
 ![Preview](./img/preview.png)
 
-## 🚀 Features
+Built using Neutralino, React, and Node.js, some features include:
 
-- Continuously display custom Discord Rich Presence.
+- Continuously display rich presence.
 - Hide the window in the system tray.
 - Cross-platform (probably™).
 
-#### Planned
-
-- Drop-in RPC modules for select games.
-- Drop-in RPC modules for activities (e.g. Birthday countdown)
+Over time, I hope to expand these features with a drop-in module system to support different games or special activities. For example, a countdown to a special occasion, or the current score of your favorite sports match!
 
 > [!Warning]  
 > **Work in Progress** - features and bugs may appear or disappear at random. Check back often!
 
 ## 🧑‍💻 Setup Instructions
 
-### Getting started
+1.  #### Install the App
 
-Download the [latest release](https://github.com/benjammin4dayz/jamrpc-alpha/releases/latest) and extract it anywhere you prefer.
+    Download the [latest release](https://github.com/benjammin4dayz/jamrpc-alpha/releases/latest) and extract it anywhere.
 
-### Automatic (TLDR)
+2.  #### Get Node.js
 
-1.  Start `install.cmd` to download the project's dependencies.
+    Download a portable Node.js **binary** from [nodejs.org](https://nodejs.org/en/download/)
 
-2.  Start the app!
+    - [v20.11.1 - Windows x64](https://nodejs.org/dist/v20.11.1/node-v20.11.1-win-x64.zip)
 
-### Manual
+3.  #### Configure the App
 
-<details>
+    Drag and drop `node.exe` into the App's `extensions/` folder.
 
-1. #### Get the dependencies.
+> [!NOTE]  
+> This app expects a `node` executable inside the `extensions/` folder. Global installs are not supported at this time.
 
-   Download a Node.js **binary** from [nodejs.org](https://nodejs.org/en/download/)
-
-   - [Windows x64](https://nodejs.org/dist/v20.11.1/node-v20.11.1-win-x64.zip)
-
-2. #### Configure the dependencies
-
-   Move `node.exe` to the app folder and drop it inside `extensions/`.
-
-   > [!NOTE]  
-   > `node.exe` MUST be inside the extensions/ folder. Global installs are not supported at this time.
-
-3. #### Start the app!
-
-</details>
-
-## Acknowledgements
+## 👥 Acknowledgements
 
 | Name             | Reason                                                  | Links                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | ---------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -61,7 +44,7 @@ Download the [latest release](https://github.com/benjammin4dayz/jamrpc-alpha/rel
 
 ---
 
-### Notes
+### ✏️ Notes
 
 <details>
 <summary>Development</summary>
